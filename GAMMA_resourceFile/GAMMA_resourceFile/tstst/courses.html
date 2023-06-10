@@ -1,0 +1,20 @@
+<h2>All Courses</h2>
+
+<table id="course" class="w3-table-all w3-striped w3-bordered" ng-controller="courses">
+        <input type="text" ng-model="search" placeholder="Search for Courses">
+    <tr>
+        <th>Subject Code</th>
+        <th>Subject Name</th>
+        <th>Number of Lecturer</th>
+        <th>Number of Student</th>
+        <th>Section</th>
+
+    </tr>
+    <tr ng-repeat="item in timetable | filter: searchFilter">
+        <td>{{item.kod_subjek}}</td>
+        <td>{{item.nama_subjek}}</td>
+        <td>{{item.bil_pensyarah}}</td>
+        <td>{{item.bil_pelajar}}</td>
+        <td>{{item.bil_seksyen}}</td>
+    </tr>
+</table>

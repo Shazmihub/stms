@@ -1,0 +1,18 @@
+<div ng-controller="searchoption">
+
+
+<div ng-show="sessionUser.description == 'Pensyarah'">
+    <a class="w3-button" href="#!lectsearch" ng-click="clickCourse()">Search Courses</a>
+    <a class="w3-button" href="#!lectsearch"  ng-click="clickStudent()">Search Students</a>
+    
+  </div>
+
+
+
+  <div ng-show="sessionUser.description == 'Pelajar FSKSM'">
+    <a class=" w3-button" href="#!studentsearch"  ng-click="clickCourse()">Search Courses</a>
+    <a class=" w3-button" href="#!studentsearch"  ng-click="clickLect()">Search Lecturers</a>
+    
+  </div>
+
+</div>

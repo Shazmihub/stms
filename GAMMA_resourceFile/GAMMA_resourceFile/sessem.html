@@ -1,0 +1,15 @@
+<h2>Session/Semester</h2>
+<table class="w3-table-all w3-striped w3-bordered" ng-controller="sessem">
+  <tr>
+    <th>Session</th>
+    <th>Semester</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  <tr ng-repeat="item in sessemList">
+    <td>{{item.sesi}}</td>
+    <td>{{item.semester}}</td>
+    <td>{{item.tarikh_mula}}</td>
+    <td>{{item.tarikh_tamat}}</td>
+  </tr>
+</table>

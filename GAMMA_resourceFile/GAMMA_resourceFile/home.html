@@ -1,0 +1,473 @@
+<div class="imgcontainer">
+
+  <img src="UTM-LOGO.png" alt="Avatar" class="avatar" />
+</div>
+
+<div class="w3-card-4" ng-controller="home">
+  <div class="w3-container" ng-hide="sessionUser">
+    <div class="w3-row w3-section">
+      <div class="w3-col" style="width: 50px">
+        <i class="w3-xxlarge fa fa-user"></i>
+      </div>
+      <div class="w3-rest">
+        <input
+          class="w3-input w3-border w3-round"
+          ng-model="login"
+          type="text"
+          placeholder="Username"
+        />
+      </div>
+    </div>
+    <div class="w3-row w3-section">
+      <div class="w3-col" style="width: 50px">
+        <i class="w3-xxlarge fa fa-key"></i>
+      </div>
+      <div class="w3-rest">
+        <input
+          class="w3-input w3-border w3-round"
+          ng-model="password"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+    </div>
+    <a href="#!forgotpassword"> <center>Forgot Password  </center></a>
+    <button class="w3-button w3-block w3-round w3-teal" ng-click="authUser()">
+      Login
+    </button>
+  </div>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Full-width input fields */
+    input[type='text'],
+    input[type='password'] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+      background-color: #04aa6d;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+      position: relative;
+    }
+
+    img.avatar {
+      height: 30%;
+      width: 30%;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+      padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto;
+      /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 80%;
+      /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      color: #000;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: red;
+      cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s;
+    }
+
+    @-webkit-keyframes animatezoom {
+      from {
+        -webkit-transform: scale(0);
+      }
+
+      to {
+        -webkit-transform: scale(1);
+      }
+    }
+
+    @keyframes animatezoom {
+      from {
+        transform: scale(0);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+
+    /* Define the animation */
+    @keyframes logo-zoom-in-fade {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Apply the animation to the logo */
+    .avatar {
+      animation: logo-zoom-in-fade 1s ease-in;
+    }
+  </style>
+
+  <div class="w3-container" ng-show="sessionUser" style="margin-top: 40px;">
+    <div ng-if="sessionUser.description == 'Pensyarah'">
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width: 50px">
+          <i class="w3-xxlarge fa fa-user"></i>
+        </div>
+        <div class="w3-rest">
+          <a href="#!lecturerpage" class="w3-large w3-text-teal"
+            >{{sessionUser.full_name}}</a >
+        </div>
+      </div>
+
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width: 50px">
+          <i class="w3-xxlarge fa fa-info-circle"></i>
+        </div>
+        <div class="w3-rest">
+          <p class="w3-large w3-text-teal">{{sessionUser.description}}</p>
+        </div>
+      </div>
+      <button class="w3-button w3-block w3-round w3-teal" ng-click="logout()">
+        Logout
+      </button>
+    </div>
+
+    <div ng-if="sessionUser.description == 'Pelajar FSKSM'">
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width: 50px">
+          <i class="w3-xxlarge fa fa-user"></i>
+        </div>
+        <div class="w3-rest">
+          <a href="#!studentpage" class="w3-large w3-text-teal"
+            >{{sessionUser.full_name}}</a
+          >
+        </div>
+      </div>
+
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width: 50px">
+          <i class="w3-xxlarge fa fa-info-circle"></i>
+        </div>
+        <div class="w3-rest">
+          <p class="w3-large w3-text-teal">{{sessionUser.description}}</p>
+        </div>
+      </div>
+    
+      <button class="w3-button w3-block w3-round w3-teal" ng-click="logout()">
+        Logout
+      </button>
+        </div>
+</div>
+
+      <!-- <div class="w3-container" ng-show="sessionUser">
+      <div class="w3-row w3-section">
+        <div class="w3-col" style="width: 50px">
+          <i class="w3-xxlarge fa fa-user"></i>
+        </div>
+        <div class="w3-rest">
+          <a href="#!lecturerpage" class="w3-large w3-text-teal"
+            >{{sessionUser.full_name}}</a
+          >
+        </div>
+      </div>
+
+      <div class="w3-container" ng-show="sessionUser">
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width: 50px">
+            <i class="w3-xxlarge fa fa-user"></i>
+          </div>
+          <div class="w3-rest">
+            <a href="#!studentpage" class="w3-large w3-text-teal"
+              >{{sessionUser.full_name}}</a
+            >
+          </div>
+        </div>
+
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width: 50px">
+            <i class="w3-xxlarge fa fa-info-circle"></i>
+          </div>
+          <div class="w3-rest">
+            <p class="w3-large w3-text-teal">{{sessionUser.description}}</p>
+          </div>
+        </div>
+        <button class="w3-button w3-block w3-round w3-teal" ng-click="logout()">
+          Logout
+        </button>
+      </div> -->
+
+      <!-- <div ng-show="userCourses">
+        <table class="w3-table-all w3-text-teal">
+            <tr ng-repeat="item in userCourses | filter: {sesi: currentSession, semester: currentSemester}">
+                <td>
+                    <b>{{item.kod_subjek}}  {{item.nama_subjek}}  - {{item.seksyen}}</b>
+                    <br>
+                    <span ng-repeat="ttv in item.timetableView">
+                        {{ttv.day}} - {{ttv.time}}<br>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div> -->
+      <!-- </div> -->
+      <!-- 
+      <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Full-width input fields */
+        input[type='text'],
+        input[type='password'] {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+          background-color: #04aa6d;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        button:hover {
+          opacity: 0.8;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+          width: auto;
+          padding: 10px 18px;
+          background-color: #f44336;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+          text-align: center;
+          margin: 24px 0 12px 0;
+          position: relative;
+        }
+
+        img.avatar {
+          height: 30%;
+          width: 30%;
+        }
+
+        .container {
+          padding: 16px;
+        }
+
+        span.psw {
+          float: right;
+          padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+          display: none;
+          /* Hidden by default */
+          position: fixed;
+          /* Stay in place */
+          z-index: 1;
+          /* Sit on top */
+          left: 0;
+          top: 0;
+          width: 100%;
+          /* Full width */
+          height: 100%;
+          /* Full height */
+          overflow: auto;
+          /* Enable scroll if needed */
+          background-color: rgb(0, 0, 0);
+          /* Fallback color */
+          background-color: rgba(0, 0, 0, 0.4);
+          /* Black w/ opacity */
+          padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+          background-color: #fefefe;
+          margin: 5% auto 15% auto;
+          /* 5% from the top, 15% from the bottom and centered */
+          border: 1px solid #888;
+          width: 80%;
+          /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+          position: absolute;
+          right: 25px;
+          top: 0;
+          color: #000;
+          font-size: 35px;
+          font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+          color: red;
+          cursor: pointer;
+        }
+
+        /* Add Zoom Animation */
+        .animate {
+          -webkit-animation: animatezoom 0.6s;
+          animation: animatezoom 0.6s;
+        }
+
+        @-webkit-keyframes animatezoom {
+          from {
+            -webkit-transform: scale(0);
+          }
+
+          to {
+            -webkit-transform: scale(1);
+          }
+        }
+
+        @keyframes animatezoom {
+          from {
+            transform: scale(0);
+          }
+
+          to {
+            transform: scale(1);
+          }
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+          span.psw {
+            display: block;
+            float: none;
+          }
+
+          .cancelbtn {
+            width: 100%;
+          }
+        }
+
+        /* Define the animation */
+        @keyframes logo-zoom-in-fade {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        /* Apply the animation to the logo */
+        .avatar {
+          animation: logo-zoom-in-fade 1s ease-in;
+        }
+      </style> -->
+    </div>
+  </div>
+</div>

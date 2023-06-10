@@ -1,0 +1,38 @@
+<div>
+  <h2>Student Courses</h2>
+  <table
+    class="w3-table-all w3-striped w3-bordered"
+    ng-controller="studentcourses"
+  >
+    <tr>
+      <th>Subject Code</th>
+      <th>Subject Name</th>
+      <th>Section</th>
+    </tr>
+    <tr
+      ng-repeat="item in userCourses | filter: {sesi: currentSession, semester: currentSemester}"
+    >
+      <td>{{item.kod_subjek}}</td>
+      <td>{{item.nama_subjek}}</td>
+      <td>{{item.seksyen}}</td>
+    </tr>
+  </table>
+</div>
+
+<br /><br />
+<h2>Timetable</h2>
+<div ng-show="userCourses">
+  <table class="w3-table-all w3-text-teal" ng-controller="studentcourses">
+    <tr
+      ng-repeat="item in userCourses | filter: {sesi: currentSession, semester: currentSemester}"
+    >
+      <td>
+        <b>{{item.kod_subjek}} - {{item.seksyen}}</b>
+        <br />
+        <span ng-repeat="ttv in item.timetableView">
+          {{ttv.day}} - {{ttv.time}}<br />
+        </span>
+      </td>
+    </tr>
+  </table>
+</div>

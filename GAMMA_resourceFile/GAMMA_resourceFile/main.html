@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<title>(STMS)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body ng-app="myTime" ng-controller="main">
+<header class="w3-top w3-bar w3-theme">
+    <div class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme w3-left" onclick="openSidebar()">
+        <i class="fa fa-bars"></i>
+    </div>
+    <h1 class="w3-bar-item w3-center">My Time</h1>
+</header>
+
+    <nav class="w3-sidebar w3-bar-block w3-card" id="mySidebar">
+        <div class="w3-container w3-theme-d2">
+            <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">x</span>
+            <i class="fa fa-times"></i>
+            </span>
+        </div>
+        <a class="w3-bar-item w3-button" href="#"><i class="fa fa-home"></i> Home</a>
+        <a class="w3-bar-item w3-button" href="#!sessem"><i class="fa fa-calendar"></i> Session/Semester</a>
+        <a class="w3-bar-item w3-button" href="#!courses"><i class="fa fa-book"></i> Courses</a>
+ 
+<div ng-show="sessionUser">
+    <a class="w3-bar-item w3-button" href="#!{{sessionUser.description == 'Pensyarah' ? 'lecturerpage' : (sessionUser.description == 'Pelajar FSKSM' ? 'studentpage' : '')}}"><i class="fa fa-book"></i> My Profile</a>
+    <a ng-show="sessionUser" class="w3-bar-item w3-button" href="#!search"><i class="fa fa-search"></i> Search</a>
+    <a ng-show="sessionUser.description == 'Pensyarah'" class="w3-bar-item w3-button" href="#!lecturercourses"><i class="fa fa-book"></i> My Courses</a>
+      <a ng-show="sessionUser.description == 'Pelajar FSKSM'" class="w3-bar-item w3-button" href="#!studentcourses"><i class="fa fa-book"></i> My Courses</a>
+</div>
+
+        </div>
+    </nav>
+
+    <header class="w3-top w3-bar w3-theme">
+        <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme"  onclick="openSidebar()">&#9776;</button>
+        <h2 class="w3-bar-item"> <center>Smart Timetable Management System </center></h2>
+    </header>
+
+    <div class="w3-container main-content" 
+         style="margin-top:263px; border-style: solid; overflow-y:scroll; "
+        onClick="closeSidebar();" ng-view>
+        Content area...
+    </div>
+
+    <footer class="w3-container w3-bottom w3-theme w3-margin-top w3-center">
+        <h4>Faculty of Computing, UTM.</h4>
+    </footer>
+</body>
+
+</html>
+<style>
+    /* Change the font for the h1 element */
+    h1 {
+        font-family: 'Noto Sans', sans-serif;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    closeSidebar();
+
+    $("a.w3-bar-item").click(function() { closeSidebar();  });
+
+    function openSidebar() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+
+    function closeSidebar() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+
+     function showMessage() {
+                alert("Your new password have sent to your email");
+            }
+
+            
+
+       
+</script>
+<script src="./main.js"></script>
+<script src="./sessem.js"></script>
+<script src="./home.js"></script>
+<script src="./courses.js"></script>
+<script src="./lecturercourses.js"></script>
+<script src="./studentcourses.js"></script>
+<script src="./search.js"></script>

@@ -1,0 +1,71 @@
+
+
+<div ng-show="click == 'course'">
+    <h2>Search Courses</h2>
+
+    <table id="course" class="w3-table-all w3-striped w3-bordered" ng-controller="searchcourses">
+            <input type="text" ng-model="search" placeholder="Search for Courses">
+        <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Number of Lecturer</th>
+            <th>Number of Student</th>
+            <th>Section</th>
+    
+        </tr>
+        <tr ng-repeat="item in timetable | filter: searchFilter">
+            <td>{{item.kod_subjek}}</td>
+            <td>{{item.nama_subjek}}</td>
+            <td>{{item.bil_pensyarah}}</td>
+            <td>{{item.bil_pelajar}}</td>
+            <td>{{item.bil_seksyen}}</td>
+        </tr>
+    </table>
+  
+
+</div>
+
+<div ng-show="click == 'lect'">
+
+  <h2>Search Lecturers</h2>
+  
+  <table id="lecturertable" class="w3-table-all w3-striped w3-bordered" ng-controller="searchlecturer">
+      <div ng-init="typefilter='nopekerja'">
+      <input type="text" ng-model="searchl" placeholder="Search for Courses"><br>
+      <br>Filter by :<br>
+      <input type="radio" id="nopekerja" name="filter" ng-model="typefilter" value="nopekerja" >
+      <label for="nopekerja">Staff Number </label>
+      <input type="radio" id="nama" name="filter" ng-model="typefilter" value="nama">
+      <label for="nama">Lecturer Name </label>
+      <input type="radio" id="nosubject" name="filter" ng-model="typefilter" value="nosubject">
+      <label for="nosubject">Number of Subjects</label>
+      <input type="radio" id="nosection" name="filter" ng-model="typefilter" value="nosection">
+      <label for="nosection">Number of Sections</label>
+      <input type="radio" id="nopelajar" name="filter" ng-model="typefilter" value="nopelajar">
+      <label for="nopelajar">Number of Students </label>
+      <br>
+      <br>
+  </div>
+  <tr>
+      <th>Staff Number</th>
+      <th>Lecturer Name</th>
+      <th>Number of Subjects</th>
+      <th>Number of Sections</th>
+      <th>Number of Students</th>
+      <th></th>
+
+  </tr>
+  <tr ng-repeat="pen in pensyarah | filter: searchlectFilter">
+      <td>{{pen.no_pekerja}}</td>
+      <td>{{pen.nama}}</td>
+      <td>{{pen.bil_subjek}}</td>
+      <td>{{pen.bil_seksyen}}</td>
+      <td>{{pen.bil_pelajar}}</td>
+      <td><a href="#!lectdetails">  <button class="w3-button w3-white w3-border w3-border-yellow w3-round-large" ng-click="setLectDetails(pen)">Details</button></a></td>
+  </tr>
+</table>
+
+
+
+
+</div>

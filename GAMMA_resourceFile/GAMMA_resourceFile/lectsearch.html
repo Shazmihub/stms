@@ -1,0 +1,72 @@
+
+
+<div ng-show="click == 'course'">
+    <h2>Search Courses</h2>
+
+    <table id="course" class="w3-table-all w3-striped w3-bordered" ng-controller="searchcourses">
+            <input type="text" ng-model="searchc" placeholder="Search for Courses">
+        <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Number of Lecturer</th>
+            <th>Number of Student</th>
+            <th>Section</th>
+    
+        </tr>
+        <tr ng-repeat="item in timetable | filter: searchcourseFilter">
+            <td>{{item.kod_subjek}}</td>
+            <td>{{item.nama_subjek}}</td>
+            <td>{{item.bil_pensyarah}}</td>
+            <td>{{item.bil_pelajar}}</td>
+            <td>{{item.bil_seksyen}}</td>
+        </tr>
+    </table>
+  
+
+</div>
+
+<div ng-show="click == 'student'">
+    <h2>Search Students</h2>
+    
+    <table id="studenttable" class="w3-table-all w3-striped w3-bordered" ng-controller="searchstudent" >
+        <div ng-init="typefilter='nama'">
+        <input type="text" ng-model="searchs" placeholder="Search for Students"><br>
+        <br>Filter by :<br>
+        <input type="radio" id="nama" name="filter" ng-model="typefilter" value="nama" >
+        <label for="nama">Nama </label>
+        <input type="radio" id="nomatrik" name="filter" ng-model="typefilter" value="nomatrik">
+        <label for="nomatrik">Matric Number</label>
+        <input type="radio" id="kodfakulti" name="filter" ng-model="typefilter" value="kodfakulti">
+        <label for="kodfakulti">Faculty Code </label>
+        <input type="radio" id="kodkursus" name="filter" ng-model="typefilter" value="kodkursus">
+        <label for="kodkursus">Course Code </label>
+        <input type="radio" id="bilsubjek" name="filter" ng-model="typefilter" value="bilsubjek">
+        <label for="bilsubjek">Number of Subjects </label>
+        <input type="radio" id="tahunkursus" name="filter" ng-model="typefilter" value="tahunkursus">
+        <label for="tahunkursus">Course Year </label>
+        </div>
+        <br>
+    <tr>
+        <th>Matric Number</th>
+        <th>Student Name</th>
+        <th>Faculty Code</th>
+        <th>Year</th>
+        <th>Course Code</th>
+        <th>Number of Subjects</th>
+
+    </tr>
+    <tr ng-repeat="pel in listpelajar | filter: searchstudentFilter">
+        <td>{{pel.no_matrik}}</td>
+        <td>{{pel.nama}}</td>
+        <td>{{pel.kod_fakulti}}</td>
+        <td>{{pel.tahun_kursus}}</td>
+        <td>{{pel.kod_kursus}}</td>
+        <td>{{pel.bil_subjek}}</td>
+        <td><a href="#!studentdetails">  <button class="w3-button w3-white w3-border w3-border-yellow w3-round-large" ng-click="setStudentDetails(pel)">Details</button></a></td>
+    </tr>
+</table>
+
+
+
+
+</div>
